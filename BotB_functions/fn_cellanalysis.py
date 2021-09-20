@@ -51,11 +51,8 @@ def plot_thickbreakdown(cell):
     unit = cell.unit
     if 'cellstack' in list(cell.keys()):
         cellstack = cell.cellstack
-        print('cell input')
     else:
         cellstack = cell
-        print('cell stack input')
-        print(cellstack)
         
     cellstack.separator.thick.ito(unit.um)
     sep = get_nominal(cellstack.separator.thick)
