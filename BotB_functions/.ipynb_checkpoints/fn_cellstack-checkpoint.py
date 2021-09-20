@@ -9,11 +9,31 @@ from dotmap import DotMap
 import sys  
 
 
-# PRINT BATTERY PROPERTY DICTIONARY STRUCTURE
+#Print out the structure of any battery dictionary/dotmap
 def print_struct(data):
     import json
     print(json.dumps(data, indent=5, default=str))
     
+    
+#Combines each component into a dict dotmap
+def make_cellstack(**kwargs):
+    cellstack = {
+        "positive": 'missing',
+        "negative": 'missing',
+        "separator": 'missing',
+        "electrolyte": 'missing'
+    }
+    for key, value in kwargs.items(): #Load specified properties from arguments
+        cellstack[key] = value
+    cellstack = DotMap(cellstack)
+    unit = cellstack.unit
+        
+    if any(x == 'missing' for x in cellstack.values()): #Check if any are unspecified
+     raise ValueError('Unspecified cellstack properties.')
+    del cellstack.unit
+    return cellstack
+
+
 # ACTIVE MATERIAL STRUCTURE
 def make_active(**kwargs):
     active = {
@@ -31,7 +51,85 @@ def make_active(**kwargs):
     del active.unit
     return active
 
+    
+# CURRENT COLLECTOR
+def make_currentcollector(**kwargs):
+    currentcollector = {
+        "name": 'missing', #string
+        "thick": 'missing', #um
+        "density": 'missing' #g/cm3
+    }
+    for key, value in kwargs.items(): #Load specified properties from arguments
+        currentcollector[key] = value
+    currentcollector = DotMap(currentcollector)
+    unit = currentcollector.unit
+    
+    if currentcollector.name == 'Cu':
+        currentcollector.density = 8.96*unit.g/unit.cm**3
+    elif currentcollector.name == 'Al':
+        currentcollector.density = 2.7*unit.g/unit.cm**3 
+        
+    if any(x == 'missing' for x in currentcollector.values()): #Check if any are unspecified
+     raise ValueError('Unspecified currentcollector properties.')
+    del currentcollector.unit
+    return currentcollector
 
+# ELECTRODE, contains the electrode coating composite and the current collector
+def make_electrode(**kwargs):
+    electrode = {
+        "composite": 'missing',
+        "currentcollector": 'missing'
+    }
+    for key, value in kwargs.items(): #Load specified properties from arguments
+        electrode[key] = value
+    electrode = DotMap(electrode)
+    unit = electrode.unit
+        
+    if any(x == 'missing' for x in electrode.values()): #Check if any are unspecified
+     raise ValueError('Unspecified electrode properties.')
+    del electrode.unit
+    return electrode
+
+
+# SEPARATOR
+def make_separator(**kwargs):
+    separator = {
+        "name": 'missing', #string
+        "thick": 'missing', #um
+        "porosity": 'missing',
+        "density": 'missing' #g/cm3
+    }
+    for key, value in kwargs.items(): #Load specified properties from arguments
+        separator[key] = value
+    separator = DotMap(separator)
+    unit = separator.unit
+        
+    if any(x == 'missing' for x in separator.values()): #Check if any are unspecified
+     raise ValueError('Unspecified separator properties.')
+    del separator.unit
+    return separator
+
+# ELECTROLYTE
+def make_electrolyte(**kwargs):
+    electrolyte = {
+        "name": 'missing', #string
+        "concentration": 'missing', #um
+        "density": 'missing' #g/cm3
+    }
+    for key, value in kwargs.items(): #Load specified properties from arguments
+        electrolyte[key] = value
+    
+    electrolyte = DotMap(electrolyte)
+    unit = electrolyte.unit
+    electrolyte.concentration.ito(unit.mol/unit.L)
+
+    dens = 0.091*(unit.L/unit.mol)*(unit.g/unit.cm**3)*(electrolyte.concentration) + 1.1*unit.g/unit.cm**3 #Typical density vs conc function
+    electrolyte.density = dens
+    
+    if any(x == 'missing' for x in electrolyte.values()): #Check if any are unspecified
+     raise ValueError('Unspecified electrolyte properties.')
+    del electrolyte.unit
+    return electrolyte
 
 # COMPOSITE ELECTRODE STRUCTURE
 def make_composite(**kwargs):

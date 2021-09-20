@@ -1,0 +1,10 @@
+name,name_long,formula,type,cap,V,n,density,theorycap
+NCA,lithium nickel cobalt aluminium oxide,Li(Ni0.8Co0.15Al0.05)O2,cathode,210,3.86,1,4.85,279
+LCO,lithium cobalt oxide,LiCoO2,cathode,165,3.86,1,5.1,274
+LFP,lithium iron phosphate,LiFePO4,cathode,160,3.375,1,3.6,170
+NMC622,lithium nickel manganese colbalt oxide,Li(Ni0.6Mn0.2Co0.2)O2,cathode,181,3.86,1,4.7,277
+NMC811,lithium nickel manganese colbalt oxide,Li(Ni0.8Mn0.1Co0.1)O2,cathode,195,3.86,1,4.7,276
+LTO,lithium titanate,Ti5O12,anode,167,1.55,3,3.43,186
+Gr,graphite,C6,anode,344,0.17,1,2.24,372
+Li,lithium metal,Li,anode,3862,0,1,0.534,3861
+Si,silicon,Si,anode,2200,0.4,4,2.3,3817
