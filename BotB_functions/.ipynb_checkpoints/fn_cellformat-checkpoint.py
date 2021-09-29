@@ -102,6 +102,7 @@ def make_cylindrical(**kwargs):
     sepmass.ito(unit.g)
     jellymass = posmass + posccmass + negmass + negccmass + sepmass + elytemass
     jellymass.ito(unit.g)
+    d_cell = cell.diameter
     canmass = cell.candens*cell.canthick*(np.pi*(d_cell*h_cell) + 2*np.pi*(d_cell/2)**2) + cell.extramass
     canmass.ito(unit.g)
     cellmass = canmass + jellymass

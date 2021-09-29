@@ -467,7 +467,6 @@ def plot_2D_cylindrical(cell):
             nominal = value.n
         except AttributeError:
             nominal = value.magnitude
-
         return nominal
 
     unit = cell.unit
