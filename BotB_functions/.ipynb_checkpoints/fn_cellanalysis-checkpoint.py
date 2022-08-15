@@ -25,6 +25,7 @@ def print_cellresults(cell):
     print('grav. energy dens.:' + str(gravimetric_energy(cell)))
     print('vol energy dens.:' + str(volumetric_energy(cell)))
     print('------------------------------------------------------------')
+    print('Avg. cell voltage: '   + str(cell.avgE))
     print('cell energy: '   + str(cell.energy))
     print('cell capacity: '   + str(cell.capacity))
     print('cell mass: ' + str(cell.mass.total))
@@ -177,6 +178,7 @@ def plot_thickbreakdown(cell):
  
     ax.legend(loc='upper center', bbox_to_anchor=(0.5, 1.8),
               fancybox=True, ncol=5, frameon=False)  
+    plt.show()
     
 def plot_massbreakdown(cell):
     import numpy as np 
@@ -312,8 +314,7 @@ def plot_massbreakdown(cell):
     ax.legend(loc='upper center', bbox_to_anchor=(0.5, 1.8),
               fancybox=True, ncol=4, frameon=False)  
     ax.set_xticks(np.linspace(0,100,11))
-    plt.show() 
-    
+    plt.show()
     
     
     
@@ -467,7 +468,6 @@ def plot_2D_cylindrical(cell):
             nominal = value.n
         except AttributeError:
             nominal = value.magnitude
-
         return nominal
 
     unit = cell.unit
@@ -737,4 +737,4 @@ def plot_3D_pouch(cell):
            fontsize=anno_fontsize,
            zdir = ('x'),
            ha='center', va='center')
-    #     plt.show()
+    plt.show()

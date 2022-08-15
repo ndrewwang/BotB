@@ -136,6 +136,7 @@ def make_cylindrical(**kwargs):
     cell.mass.negative = negmass
     cell.mass.negativecc = negccmass
     cell.mass.separator = sepmass
+    cell.avgE = cell.cellstack.positive.composite.active.avgE-cell.cellstack.negative.composite.active.avgE
     
     return cell
     
@@ -186,8 +187,8 @@ def make_pouch(**kwargs):
     if any(x == 'missing' for x in cell.values()): #Check if any are unspecified
      raise ValueError('Unspecified cell properties.')
 
-    area = cell.nlayers*cell.width*cell.height #jelly roll area
-    
+    area = cell.nlayers*cell.width*cell.height #jelly roll area#
+
     #Capacity
     capacity = min(cell.cellstack.positive.composite.arealcap,cell.cellstack.negative.composite.arealcap) * cell.llifactor * 2*area #double coated
     capacity.ito(unit.A*unit.hr)
@@ -218,7 +219,6 @@ def make_pouch(**kwargs):
     casemass.ito(unit.g)
     
     cellmass = casemass + jellymass
-    
     #Stackthick
     stackthick = 2*cell.cellstack.positive.composite.thick + cell.cellstack.positive.currentcollector.thick  \
                     + 2*cell.cellstack.negative.composite.thick + cell.cellstack.negative.currentcollector.thick  \
@@ -259,5 +259,6 @@ def make_pouch(**kwargs):
     cell.mass.negative = negmass
     cell.mass.negativecc = negccmass
     cell.mass.separator = sepmass
+    cell.avgE = cell.cellstack.positive.composite.active.avgE-cell.cellstack.negative.composite.active.avgE
     
     return cell
