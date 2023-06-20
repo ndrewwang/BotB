@@ -19,6 +19,7 @@ As an overview, we'll go from small to large, with why different chemistries sto
 * [BotB 2: Active materials & electrodes](https://intercalationstation.substack.com/p/botb-2-active-materials-and-electrodes)
 * [BotB 3: Cell sandwich layers](https://intercalationstation.substack.com/p/botb-3-the-cell-stack)
 * [BotB 4: Winding a cylindrical cell](https://intercalationstation.substack.com/p/botb-4-cylindrical-cells)
+* [BotB 5: Stacking up a pouch cell (https://intercalationstation.substack.com/p/botb-5-pouch-cells)
 
 ## 🔋 Check out Intercalation Station now:
 
